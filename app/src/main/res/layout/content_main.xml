@@ -13,13 +13,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView3" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewPrint"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="42dp"
-        android:textSize="@dimen/abc_action_bar_content_inset_material" />
 </RelativeLayout>

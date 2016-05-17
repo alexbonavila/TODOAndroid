@@ -77,9 +77,6 @@ public class MainActivity extends AppCompatActivity
             //Error TODO
         }
 
-        TextView myTextView = (TextView) findViewById(R.id.textViewPrint);
-        myTextView.setText(tasks.toString());
-        Log.d(TODO_LIST, tasks.toString());
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
