@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -60,13 +61,15 @@ public class MainActivity extends AppCompatActivity
                     "        ]";
 
             SharedPreferences.Editor editor = todos.edit();
-            editor.putString(SHARED_PREFERENCES_TODOS, initial_json);
+            editor.putString(TODO_LIST, initial_json);
             editor.commit();
-            todoList = todos.getString(TODO_LIST, initial_json);
+            todoList = todos.getString(TODO_LIST, null);
 
         }
 
-        gson = new Gson();
+        Log.d("Test", todoList);
+
+        Toast.makeText(this, todoList, Toast.LENGTH_LONG).show();
 
         Type arrayTodoList = new TypeToken<TodoArrayList>(){}.getType();
         TodoArrayList temp = gson.fromJson(todoList, arrayTodoList);
