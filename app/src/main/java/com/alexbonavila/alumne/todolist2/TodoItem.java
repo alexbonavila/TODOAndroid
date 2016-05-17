@@ -1,5 +1,7 @@
 package com.alexbonavila.alumne.todolist2;
 
+import com.google.gson.Gson;
+
 public class TodoItem {
 
     private String name;
@@ -41,4 +43,12 @@ public class TodoItem {
     public String toString() {
         return "[ name:" +name + ", done:" + done + ", priority:" + priority+"]";
     }
+
+    public String serializable(){
+        Gson gson = new Gson();
+
+        return gson.toJson(this);
+
+    }
+
 }

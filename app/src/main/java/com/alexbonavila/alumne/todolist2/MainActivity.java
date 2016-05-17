@@ -34,11 +34,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
         SharedPreferences todos = getSharedPreferences(SHARED_PREFERENCES_TODOS, 0);
         String todoList = todos.getString(TODO_LIST, null);
+
         gson = new Gson();
 
         /*
@@ -51,18 +49,8 @@ public class MainActivity extends AppCompatActivity
         ]
         */
 
-        Type arrayTodoList = new TypeToken<TodoItem>(){}.getType();
+        Type arrayTodoList = new TypeToken<TodoArrayList>(){}.getType();
         gson.fromJson(todoList,arrayTodoList);
-
-
-
-
-
-
-
-
-
-
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
