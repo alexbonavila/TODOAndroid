@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences todos = getSharedPreferences(SHARED_PREFERENCES_TODOS, 0);
         String todoList = todos.getString(TODO_LIST, null);
 
-        gson = new Gson();
 
         /*
         //El JSON te un error
@@ -49,6 +48,21 @@ public class MainActivity extends AppCompatActivity
 
         ]
         */
+
+        if (todoList == null){
+            String initial_json= "        [\n" +
+                    "           {name:\"Compra llet\", \"done\": true, \"priority\": 2},\n" +
+                    "           {name:\"Compra pa\", \"done\": true, \"priority\": 1},\n" +
+                    "           {name:\"Fer exercici\", \"done\": false, \"priority\": 3}\n" +
+                    "\n" +
+                    "        ]";
+
+            SharedPreferences.Editor editor = todos.edit();
+            editor.putString(SHARED_PREFERENCES_TODOS, initial_json);
+
+        }
+
+        gson = new Gson();
 
         Type arrayTodoList = new TypeToken<TodoArrayList>(){}.getType();
         TodoArrayList temp = gson.fromJson(todoList, arrayTodoList);
