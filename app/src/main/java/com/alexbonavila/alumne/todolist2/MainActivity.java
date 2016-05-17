@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity
 
             SharedPreferences.Editor editor = todos.edit();
             editor.putString(SHARED_PREFERENCES_TODOS, initial_json);
+            editor.commit();
 
         }
 
