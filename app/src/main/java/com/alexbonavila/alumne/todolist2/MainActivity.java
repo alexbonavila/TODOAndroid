@@ -1,6 +1,7 @@
 package com.alexbonavila.alumne.todolist2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,8 +15,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String SHARED_PREFERENCES_TODOS ="SP_TODOS";
+    private static final String TODO_LIST ="todo_list" ;
+    private Gson gson;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +33,37 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+
+        SharedPreferences todos = getSharedPreferences(SHARED_PREFERENCES_TODOS, 0);
+        String todoList = todos.getString(TODO_LIST, null);
+        gson = new Gson();
+
+        /*
+        //El JSON te un error
+        [
+           {name:"Compra llet", "done": true, "priority": 2},
+           {name:"Compra pa", "done": true, "priority": 1},
+           {name:"Fer exercici", "done": false, "priority": 3}
+
+        ]
+        */
+
+        Type arrayTodoList = new TypeToken<TodoItem>(){}.getType();
+        gson.fromJson(todoList,arrayTodoList);
+
+
+
+
+
+
+
+
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
