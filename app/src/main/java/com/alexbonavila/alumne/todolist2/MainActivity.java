@@ -69,9 +69,10 @@ public class MainActivity extends AppCompatActivity
 
         Log.d("Test", todoList);
 
-        Toast.makeText(this, todoList, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, todoList, Toast.LENGTH_LONG).show();
 
         Type arrayTodoList = new TypeToken<TodoArrayList>(){}.getType();
+        this.gson = new Gson();
         TodoArrayList temp = gson.fromJson(todoList, arrayTodoList);
 
         if (temp != null){
