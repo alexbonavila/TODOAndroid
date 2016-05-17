@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity
             SharedPreferences.Editor editor = todos.edit();
             editor.putString(SHARED_PREFERENCES_TODOS, initial_json);
             editor.commit();
+            todoList = todos.getString(TODO_LIST, initial_json);
 
         }
 
@@ -73,6 +76,10 @@ public class MainActivity extends AppCompatActivity
         } else {
             //Error TODO
         }
+
+        TextView myTextView = (TextView) findViewById(R.id.textViewPrint);
+        myTextView.setText(tasks.toString());
+        Log.d(TODO_LIST, tasks.toString());
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
