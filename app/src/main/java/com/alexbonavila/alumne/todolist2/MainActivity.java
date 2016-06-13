@@ -2,6 +2,7 @@ package com.alexbonavila.alumne.todolist2;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity
             String initial_json= "        [\n" +
                     "           {name:\"Compra llet\", \"done\": true, \"priority\": 2},\n" +
                     "           {name:\"Compra pa\", \"done\": true, \"priority\": 1},\n" +
+                    "           {name:\"Compra ous\", \"done\": true, \"priority\": 4},\n" +
                     "           {name:\"Fer exercici\", \"done\": false, \"priority\": 3}\n" +
                     "\n" +
                     "        ]";
@@ -90,13 +93,13 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+/*        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Main2Activity.class );
                 startActivity(intent);
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -163,5 +166,20 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void showAddForm(View view){
+        MaterialDialog dialog = new MaterialDialog.Builder(this).
+                title("Add new Task").
+                customView(R.layout.form_add_task, true).
+                negativeText("Cancel").
+                positiveText("Add").
+                negativeColor(Color.parseColor("#ff3333")).
+                positiveColor(Color.parseColor("#2196F3")).
+                //.onPositive({
+                        //}).
+                        build();
+
+        dialog.show();
     }
 }
