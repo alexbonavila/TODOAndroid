@@ -11,7 +11,7 @@ public class TodoItem {
     public TodoItem() {
         this.name = "";
         this.done = false;
-        this.priority = 1;
+        this.priority = 2;
     }
 
     public String getName() {

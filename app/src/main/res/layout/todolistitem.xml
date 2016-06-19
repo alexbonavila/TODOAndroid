@@ -5,6 +5,17 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent">
 
+    <CheckBox
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/checkboxDone"
+        android:padding="5dp"/>
+
+    <RadioButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/priority" />
+
     <TextView
         android:id="@+id/todolistitemtext"
         android:layout_width="fill_parent"
@@ -13,7 +24,6 @@
         android:text="Nom"
         android:gravity="center_vertical"
         android:textSize="20sp"
-        android:onClick="updateTask"
-        android:clickable="true"/>
-
+        android:onClick="editTask"
+        android:clickable="true" />
 </LinearLayout>

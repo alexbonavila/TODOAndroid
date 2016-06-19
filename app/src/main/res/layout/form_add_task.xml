@@ -11,6 +11,38 @@
         android:layout_height="48dp"
         android:inputType="textCapSentences"
         android:maxLines="1"
-        android:hint="Nom tasca"/>
+        android:hint="Nom Taska"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:text="Prioritat" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/task_priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton android:id="@+id/task_priority_altisima"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Per Air!!!"
+            android:buttonTint="#1C1C1C"/>
+
+        <RadioButton android:id="@+id/task_priority_alta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Per avui"
+            android:buttonTint="#fe0000"/>
+
+        <RadioButton android:id="@+id/task_priority_baixa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aplaçable"
+            android:buttonTint="#01DF01"/>
+
+    </RadioGroup>
 </LinearLayout>
