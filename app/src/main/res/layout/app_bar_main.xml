@@ -27,9 +27,21 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_white_24dp"
+        app:backgroundTint="@color/md_edittext_error"
+        android:onClick="showAddForm"/>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_input_add"
-        android:onClick="showAddForm"/>
+        android:src="@drawable/ic_remove_white_36dp"
+        app:backgroundTint="@color/md_edittext_error"
+        android:onClick="removeTask"/>
 
 </android.support.design.widget.CoordinatorLayout>

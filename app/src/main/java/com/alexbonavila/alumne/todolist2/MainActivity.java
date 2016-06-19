@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,10 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,6 +37,22 @@ public class MainActivity extends AppCompatActivity
     private Gson gson;
     public TodoArrayList tasks;
     private CustomListAtapter adapter;
+    private String taskName;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (tasks == null) { return; }
+
+        String tasksToSave = gson.toJson(tasks);
+
+        SharedPreferences todos = getSharedPreferences(SHARED_PREFERENCES_TODOS, 0);
+        SharedPreferences.Editor editor = todos.edit();
+        editor.putString(TODO_LIST, tasksToSave);
+        editor.apply();
+
+    }
 
 
     @Override
@@ -93,6 +113,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fabRemove = (FloatingActionButton) findViewById(R.id.fab_remove);
 /*        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,6 +190,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showAddForm(View view){
+        taskName = " ";
+
+        EditText taskNameText;
+
         MaterialDialog dialog = new MaterialDialog.Builder(this).
                 title("Add new Task").
                 customView(R.layout.form_add_task, true).
@@ -176,10 +201,49 @@ public class MainActivity extends AppCompatActivity
                 positiveText("Add").
                 negativeColor(Color.parseColor("#ff3333")).
                 positiveColor(Color.parseColor("#2196F3")).
-                //.onPositive({
-                        //}).
-                        build();
+                onPositive(new MaterialDialog.SingleButtonCallback() {
+
+                    @Override
+                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                        final TodoItem todoItem = new TodoItem();
+                        todoItem.setName(taskName);
+                        todoItem.setDone(true);
+                        todoItem.setPriority(1);
+
+                        tasks.add(todoItem);
+                        //tasks.remove(1);
+                        adapter.notifyDataSetChanged();
+                    }
+                }).
+
+                build();
 
         dialog.show();
+
+        taskNameText = (EditText) dialog.getCustomView().findViewById(R.id.task_tittle);
+
+        taskNameText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                taskName = s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+    }
+
+    public void removeTask(){
+
     }
 }
