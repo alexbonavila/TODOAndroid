@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,9 +52,6 @@ public class CustomListAtapter extends BaseAdapter {
 
         final TextView tv = (TextView) convertView.findViewById(R.id.todolistitemtext);
         final CheckBox done = (CheckBox) convertView.findViewById(R.id.checkboxDone);
-        RadioButton priority = (RadioButton) convertView.findViewById(R.id.priority);
-        priority.setChecked(true);
-        priority.setClickable(false);
 
         tv.setText(list.get(position).getName());
 
@@ -65,9 +63,15 @@ public class CustomListAtapter extends BaseAdapter {
         int mediumColor = Color.parseColor("#fe0000");
         int notUrgentColor = Color.parseColor("#01DF01");
 
-        if(list.get(position).getPriority() == 1){priority.setButtonTintList(ColorStateList.valueOf(urgentColor));}
-        if(list.get(position).getPriority() == 2){priority.setButtonTintList(ColorStateList.valueOf(mediumColor));}
-        if(list.get(position).getPriority() == 3){priority.setButtonTintList(ColorStateList.valueOf(notUrgentColor));}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if(list.get(position).getPriority() == 1) {done.setButtonTintList(ColorStateList.valueOf(urgentColor));}
+            if(list.get(position).getPriority() == 2){done.setButtonTintList(ColorStateList.valueOf(mediumColor));}
+            if(list.get(position).getPriority() == 3){done.setButtonTintList(ColorStateList.valueOf(notUrgentColor));}
+        } else {
+            if(list.get(position).getPriority() == 1) {done.setBackgroundColor(urgentColor);}
+            if(list.get(position).getPriority() == 2){done.setBackgroundColor(mediumColor);}
+            if(list.get(position).getPriority() == 3){done.setBackgroundColor(notUrgentColor);}
+        }
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
