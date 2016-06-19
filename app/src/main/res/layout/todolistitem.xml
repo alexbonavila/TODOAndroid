@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <CheckBox
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/checkboxDone"
         android:padding="5dp"/>
 
@@ -18,7 +18,5 @@
         android:paddingLeft="10dp"
         android:text="Nom"
         android:gravity="center_vertical"
-        android:textSize="20sp"
-        android:onClick="editTask"
-        android:clickable="true" />
+        android:textSize="20sp"/>
 </LinearLayout>
